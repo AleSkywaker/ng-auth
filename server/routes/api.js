@@ -63,4 +63,13 @@ router.post('/login', (req, res) => {
   });
 });
 
+router.get('/libros', (req, res) => {
+  let libros = [{ titulo: 'El señor de lo sanillo', autor: 'No se' }];
+  res.json(libros);
+});
+router.get('/librosPro', (req, res) => {
+  let librosCaros = [{ titulo: 'El retorno de jedi', autor: 'varios' }];
+  res.json(librosCaros);
+});
+
 module.exports = router;
