@@ -24,14 +24,41 @@ router.get('/', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-  let userData = req.body;
-  console.log(userData);
-  let usu = new User(userData);
-  usu.save((err, registeredUser) => {
+  let usuario = {};
+  usuario.email = req.body.email;
+  usuario.password = req.body.password;
+
+  let user = new User(usuario);
+  console.log(user);
+  user.save((err, registeredUser) => {
     if (err) {
       console.log(err);
+      res.status(400).send(err.errmsg);
     } else {
       res.status(200).send(registeredUser);
+    }
+  });
+});
+
+router.post('/login', (req, res) => {
+  let usuario = {};
+  usuario.email = req.body.email;
+  usuario.password = req.body.password;
+
+  User.findOne({ email: usuario.email }, (err, user) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send(err);
+    } else {
+      if (!user) {
+        res.status(401).send('usuario no encontrado');
+      } else {
+        if (user.password !== usuario.password) {
+          res.status(401).send('algo ha ido mal');
+        } else {
+          res.status(200).send(user);
+        }
+      }
     }
   });
 });
