@@ -7,13 +7,9 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.get(
-  '/',
-  (req,
-  res => {
-    res.send('Hello from server');
-  })
-);
+app.get('/', (req, res) => {
+  res.send('hello from server');
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
