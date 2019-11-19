@@ -5,7 +5,7 @@
         <h3 class="mb-0">Register</h3>
       </div>
       <div class="card-body">
-        <form action="" class="form">
+        <form action="" class="form" (ngSubmit)="enviar()">
           <div class="form-group">
             <label for="">e-mail</label>
             <input [(ngModel)]="registerUserData.email" type="text" name="email" id="" class="form-control rounded-lg"
@@ -16,7 +16,8 @@
             <input [(ngModel)]="registerUserData.password" type="password" name="password" id=""
               class="form-control rounded-lg" required>
           </div>
-          <button (click)="registerUser()" type="button" class="btn btn-primary float-right">Registrar</button>
+          <!-- (click)="registerUser()" -->
+          <button type="submit" class="btn btn-primary float-right">Registrar</button>
         </form>
       </div>
     </div>
