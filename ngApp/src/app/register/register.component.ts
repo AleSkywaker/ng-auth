@@ -17,7 +17,12 @@ export class RegisterComponent implements OnInit {
     password: ''
   };
   formulario: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    this.formulario = fb.group({
+      name: [null],
+      password: [null]
+    });
+  }
   enviar() {
     console.log('it works');
   }
