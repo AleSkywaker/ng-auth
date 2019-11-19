@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 interface User {
-  name: string;
+  email: string;
   password: string;
 }
 
@@ -11,8 +12,14 @@ interface User {
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  registerUserData: User;
+  registerUserData: User = {
+    email: '',
+    password: ''
+  };
   constructor() {}
+  enviar() {
+    console.log('it works');
+  }
 
   ngOnInit() {}
 
