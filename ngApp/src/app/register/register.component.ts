@@ -20,7 +20,9 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder) {
     this.formulario = fb.group({
       email: [null, Validators.required],
-      password: [null, Validators.compose([Validators.required, Validators.minLength(4)])]
+      password: [null, Validators.compose([Validators.required, Validators.minLength(4)])],
+      password2: [null, Validators.compose([Validators.required, Validators.minLength(4)])],
+      terminos: [null, Validators.compose([Validators.required, Validators.requiredTrue])]
     });
   }
   enviar() {

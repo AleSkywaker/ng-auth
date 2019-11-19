@@ -14,8 +14,14 @@
             <label for="">Password</label>
             <input formControlName="password" type="password" name="password" id="" class="form-control rounded-lg">
           </div>
-          <!-- (click)="registerUser()" -->
-          <button type="submit" class="btn btn-primary float-right">Registrar</button>
+          <div class="form-group">
+            <label for="">confirm Password</label>
+            <input formControlName="password2" type="password" name="password" id="" class="form-control rounded-lg">
+          </div>
+          <div class="form-group">
+            <input formControlName="terminos" type="checkbox" name="terminos" id=""> Acepto los términos y condiciones
+          </div>
+          <button [disabled]="!formulario.valid" type="submit" class="btn btn-primary float-right">Registrar</button>
           {{formulario.value | json}}
         </form>
       </div>
