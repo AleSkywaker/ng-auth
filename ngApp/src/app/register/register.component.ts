@@ -16,7 +16,8 @@ export class RegisterComponent implements OnInit {
     email: '',
     password: ''
   };
-  constructor() {}
+  formulario: FormGroup;
+  constructor(private fb: FormBuilder) {}
   enviar() {
     console.log('it works');
   }
