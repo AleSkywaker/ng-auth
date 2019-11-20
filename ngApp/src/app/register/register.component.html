@@ -9,17 +9,41 @@
           <div class="form-group">
             <label for="">e-mail</label>
             <input formControlName="email" type="email" name="email" id="" class="form-control rounded-lg">
+            <br>
+            <div class="alert alert-danger alert-dismissible"
+              *ngIf="!formulario.controls['email'].valid && formulario.controls['email'].touched">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <strong>Email </strong>no es correcto!!!
+            </div>
           </div>
           <div class="form-group">
             <label for="">Password</label>
             <input formControlName="password" type="password" name="password" id="" class="form-control rounded-lg">
+            <br>
+            <div class="alert alert-danger alert-dismissible"
+              *ngIf="!formulario.controls['password'].valid && formulario.controls['password'].touched">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <strong>Contraseña </strong> debe tener mínimo 4 caracteres!!
+            </div>
           </div>
           <div class="form-group">
             <label for="">confirm Password</label>
             <input formControlName="password2" type="password" name="password" id="" class="form-control rounded-lg">
+            <br>
+            <div class="alert alert-danger alert-dismissible"
+              *ngIf="!formulario.controls['password2'].valid && formulario.controls['password2'].touched">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <strong>Contraseña </strong> debe tener mínimo 4 caracteres!!
+            </div>
           </div>
           <div class="form-group">
             <input formControlName="terminos" type="checkbox" name="terminos" id=""> Acepto los términos y condiciones
+            <br>
+            <div class="alert alert-danger alert-dismissible"
+              *ngIf="!formulario.controls['terminos'].valid && formulario.controls['terminos'].touched">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              Debe aceptar los <strong>términos.</strong>
+            </div>
           </div>
           <button [disabled]="!formulario.valid" type="submit" class="btn btn-primary float-right">Registrar</button>
           {{formulario.value | json}}
