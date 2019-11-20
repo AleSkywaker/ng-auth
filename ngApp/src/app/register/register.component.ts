@@ -12,10 +12,6 @@ interface User {
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  registerUserData: User = {
-    email: '',
-    password: ''
-  };
   formulario: FormGroup;
   constructor(private fb: FormBuilder) {
     this.formulario = fb.group(
@@ -33,13 +29,9 @@ export class RegisterComponent implements OnInit {
     const confirmPass = group.controls.password2.value;
     return pass === confirmPass ? null : { notSAme: true };
   }
-  enviar() {
-    console.log('it works');
+  enviar(user) {
+    console.log('it works', user);
   }
 
   ngOnInit() {}
-
-  registerUser() {
-    console.log(this.registerUserData);
-  }
 }
