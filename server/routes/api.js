@@ -35,6 +35,7 @@ router.post('/register', (req, res) => {
       console.log(err);
       res.status(400).send(err.errmsg);
     } else {
+      registeredUser.email = ':)';
       res.status(200).send(registeredUser);
     }
   });

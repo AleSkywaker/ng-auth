@@ -27,7 +27,6 @@ export class RegisterComponent implements OnInit {
     return pass === confirmPass ? null : { notSAme: true };
   }
   enviar(user: User) {
-    console.log('usuario', user);
     this.auth.registerUser(user).subscribe(
       res => console.log('response from server', res),
       err => console.log(err),
