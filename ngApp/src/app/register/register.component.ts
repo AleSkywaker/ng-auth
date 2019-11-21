@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
-
-interface User {
-  email: string;
-  password: string;
-}
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-register',
@@ -30,11 +26,11 @@ export class RegisterComponent implements OnInit {
     const confirmPass = group.controls.password2.value;
     return pass === confirmPass ? null : { notSAme: true };
   }
-  enviar(user) {
-    console.log('it works', user);
+  enviar(user: User) {
     this.auth.registerUser(user).subscribe(
-      res => console.log(res),
-      err => console.log(err)
+      res => console.log('response from server', res),
+      err => console.log(err),
+      () => console.log('completed!!!')
     );
   }
 
