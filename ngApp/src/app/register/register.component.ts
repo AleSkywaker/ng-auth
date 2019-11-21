@@ -30,7 +30,8 @@ export class RegisterComponent implements OnInit {
     console.log('usuario', user);
     this.auth.registerUser(user).subscribe(
       res => console.log(res),
-      err => console.log(err)
+      err => console.log(err),
+      () => console.log('completed!!!')
     );
   }
 
