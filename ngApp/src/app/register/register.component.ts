@@ -2,11 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 
-interface User {
-  email: string;
-  password: string;
-}
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
