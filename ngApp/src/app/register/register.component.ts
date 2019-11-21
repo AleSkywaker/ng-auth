@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
   enviar(user: User) {
     console.log('usuario', user);
     this.auth.registerUser(user).subscribe(
-      res => console.log(res),
+      res => console.log('response from server', res),
       err => console.log(err),
       () => console.log('completed!!!')
     );
