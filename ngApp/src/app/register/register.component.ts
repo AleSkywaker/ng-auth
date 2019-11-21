@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-register',
@@ -25,7 +26,7 @@ export class RegisterComponent implements OnInit {
     const confirmPass = group.controls.password2.value;
     return pass === confirmPass ? null : { notSAme: true };
   }
-  enviar(user) {
+  enviar(user: User) {
     console.log('it works', user);
     this.auth.registerUser(user).subscribe(
       res => console.log(res),
