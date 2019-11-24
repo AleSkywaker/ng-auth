@@ -69,7 +69,7 @@ router.get('/libros', (req, res) => {
   res.json(libros);
 });
 router.get('/librosPro', (req, res) => {
-  let librosCaros = [{ titulo: 'El retorno de jedi', autor: 'varios' }];
+  let librosCaros = [{ titulo: 'El retorno de jedi (PRO)', autor: 'varios' }];
   res.json(librosCaros);
 });
 
