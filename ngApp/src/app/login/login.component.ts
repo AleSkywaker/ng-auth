@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  public user: FormGroup;
+  constructor(private fb: FormBuilder, private auth: AuthService) {
+    this.user = fb.group({
+      email: [null, Validators.required],
+      password: [null, Validators.compose([Validators.required, Validators.minLength(4)])]
+    });
   }
 
+  ngOnInit() {}
+
+  entrar(usuario: any) {
+    console.log(usuario);
+    this.auth.loginUser(usuario).subscribe(
+      res => console.log('Entro con usuario', res),
+      err => console.log(err),
+      () => console.log('completed!!!')
+    );
+  }
 }
