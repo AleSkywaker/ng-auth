@@ -1,1 +1,37 @@
-<p>login works!</p>
+<div class="row mt-5">
+  <div class="col-md-6 mx-auto">
+    <div class="card rounded-lg">
+      <div class="card-header">
+        <h3 class="mb-0">Login</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="user" class="form" (ngSubmit)="entrar(user.value)">
+          <div class="form-group">
+            <label for="">e-mail</label>
+            <input formControlName="email" type="email" name="email" id="" class="form-control rounded-lg">
+            <br>
+            <div class="alert alert-danger alert-dismissible"
+              *ngIf="!user.controls['email'].valid && user.controls['email'].touched">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <strong>Email </strong>no es correcto!!!
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">Password</label>
+            <input formControlName="password" type="password" name="password" id="" class="form-control rounded-lg">
+            <br>
+            <div class="alert alert-danger alert-dismissible"
+              *ngIf="!user.controls['password'].valid && user.controls['password'].touched">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <strong>Contraseña </strong> debe tener mínimo 4 caracteres!!
+            </div>
+          </div>
+
+
+          <button [disabled]="!user.valid" type="submit" class="btn btn-primary float-right">Entrar</button>
+          {{user.value | json}}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
