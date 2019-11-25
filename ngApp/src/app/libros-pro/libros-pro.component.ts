@@ -1,3 +1,4 @@
+import { LibrosService } from './../services/libros.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./libros-pro.component.css']
 })
 export class LibrosProComponent implements OnInit {
-
-  constructor() { }
+  librosPro = [];
+  constructor(private librosProService: LibrosService) {}
 
   ngOnInit() {
+    this.librosProService.getLibrosPro().subscribe(
+      libros => {
+        this.librosPro = libros;
+      },
+      err => console.log(err)
+    );
   }
-
 }
