@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class EventService {
+export class LibrosService {
   private librosUrl = 'http://localhost:3000/api/libros';
   private librosProUrl = 'http://localhost:3000/api/librosPro';
   constructor(private http: HttpClient) {}
