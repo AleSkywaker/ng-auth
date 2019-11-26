@@ -1,4 +1,5 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 const User = require('../models/user');
@@ -35,8 +36,10 @@ router.post('/register', (req, res) => {
       console.log(err);
       res.status(400).send(err.errmsg);
     } else {
-      registeredUser.email = ':)';
-      res.status(200).send(registeredUser);
+      // registeredUser.email = ':)';
+      let payload = { subject: registeredUser._id };
+      let token = jwt.sign(payload, 'secretKey');
+      res.status(200).send({ token });
     }
   });
 });
@@ -57,7 +60,9 @@ router.post('/login', (req, res) => {
         if (user.password !== usuario.password) {
           res.status(401).send('algo ha ido mal');
         } else {
-          res.status(200).send(user);
+          let payload = { subject: user._id };
+          let token = jwt.sign(payload, 'secretKey');
+          res.status(200).send({ token });
         }
       }
     }
@@ -65,11 +70,19 @@ router.post('/login', (req, res) => {
 });
 
 router.get('/libros', (req, res) => {
-  let libros = [{ titulo: 'El señor de lo sanillo', autor: 'No se' }];
+  let libros = [
+    { titulo: 'El señor de lo sanillo', autor: 'No se', date: Date.now() },
+    { titulo: 'El señor de lo sanillo', autor: 'No se', date: Date.now() },
+    { titulo: 'El señor de lo sanillo', autor: 'No se', date: Date.now() }
+  ];
   res.json(libros);
 });
 router.get('/librosPro', (req, res) => {
-  let librosCaros = [{ titulo: 'El retorno de jedi (PRO)', autor: 'varios' }];
+  let librosCaros = [
+    { titulo: 'El retorno de jedi (PRO)', autor: 'varios', date: Date.now() },
+    { titulo: 'El retorno de jedi (PRO)', autor: 'varios', date: Date.now() },
+    { titulo: 'El retorno de jedi (PRO)', autor: 'varios', date: Date.now() }
+  ];
   res.json(librosCaros);
 });
 
