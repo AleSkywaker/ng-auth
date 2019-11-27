@@ -11,7 +11,11 @@ import { Router } from "@angular/router";
 })
 export class RegisterComponent implements OnInit {
   formulario: FormGroup;
-  constructor(private fb: FormBuilder, private auth: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router
+  ) {
     this.formulario = fb.group(
       {
         email: [null, Validators.required],
@@ -38,7 +42,10 @@ export class RegisterComponent implements OnInit {
   }
   enviar(user: User) {
     this.auth.registerUser(user).subscribe(
-      res => console.log("response from server", res),
+      res => {
+        console.log("response from server", res);
+        this.router.navigate(["/login"]);
+      },
       err => console.log(err),
       () => console.log("completed!!!")
     );
