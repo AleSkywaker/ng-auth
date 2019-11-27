@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
-import { User } from '../models/user';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AuthService } from "../services/auth.service";
+import { User } from "../models/user";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: "app-register",
+  templateUrl: "./register.component.html",
+  styleUrls: ["./register.component.css"]
 })
 export class RegisterComponent implements OnInit {
   formulario: FormGroup;
@@ -14,9 +15,18 @@ export class RegisterComponent implements OnInit {
     this.formulario = fb.group(
       {
         email: [null, Validators.required],
-        password: [null, Validators.compose([Validators.required, Validators.minLength(4)])],
-        password2: [null, Validators.compose([Validators.required, Validators.minLength(4)])],
-        terminos: [null, Validators.compose([Validators.required, Validators.requiredTrue])]
+        password: [
+          null,
+          Validators.compose([Validators.required, Validators.minLength(4)])
+        ],
+        password2: [
+          null,
+          Validators.compose([Validators.required, Validators.minLength(4)])
+        ],
+        terminos: [
+          null,
+          Validators.compose([Validators.required, Validators.requiredTrue])
+        ]
       },
       { validator: this.checkPasswords }
     );
@@ -28,9 +38,9 @@ export class RegisterComponent implements OnInit {
   }
   enviar(user: User) {
     this.auth.registerUser(user).subscribe(
-      res => console.log('response from server', res),
+      res => console.log("response from server", res),
       err => console.log(err),
-      () => console.log('completed!!!')
+      () => console.log("completed!!!")
     );
   }
 
