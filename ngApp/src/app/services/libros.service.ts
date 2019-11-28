@@ -14,7 +14,4 @@ export class LibrosService {
   getLibrosPro() {
     return this.http.get<any>(this.librosProUrl);
   }
-  loggedIn(): boolean {
-    return !!localStorage.getItem("token");
-  }
 }
