@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { User } from '../models/user';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { User } from "../models/user";
 
 @Injectable({
   providedIn: "root"
@@ -19,5 +19,8 @@ export class AuthService {
   }
   loggedIn(): boolean {
     return !!localStorage.getItem("token");
+  }
+  getToken() {
+    return localStorage.getItem("token");
   }
 }
