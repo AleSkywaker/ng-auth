@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
-
+require('dotenv').config();
 const User = require('../models/user');
 
 const mongoose = require('mongoose');
@@ -19,6 +19,17 @@ mongoose.connect(db, err => {
     console.log('conectado a mongoDB');
   }
 });
+
+function verifyToken(req, res, next) {
+  if (!req.headers.authorization) {
+    return res.status(401).send('invalid request');
+  }
+  let token = req.headers.authorization.split(' ')[1];
+  if (token === null) {
+    return res.status(401).send('missing credentials');
+  }
+  let payload = jwt.verify(token, SECRET_KEY);
+}
 
 router.get('/', (req, res) => {
   res.send('From API route');
@@ -38,7 +49,7 @@ router.post('/register', (req, res) => {
     } else {
       // registeredUser.email = ':)';
       let payload = { subject: registeredUser._id };
-      let token = jwt.sign(payload, 'secretKey');
+      let token = jwt.sign(payload, SECRET_KEY);
       res.status(200).send({ token });
     }
   });
