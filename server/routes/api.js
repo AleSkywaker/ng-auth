@@ -24,6 +24,12 @@ function verifyToken(req, res, next) {
   if (!req.headers.authorization) {
     return res.status(401).send('invalid request');
   }
+  let token = req.headers.authorization.split(' ')[1];
+  if (token === null) {
+    return res.status(401).send('missing credentials');
+  }
+  let token = jwt.sign(payload, 'secretKey');
+  let payload = jwt.verify(token, '');
 }
 
 router.get('/', (req, res) => {
