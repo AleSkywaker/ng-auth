@@ -28,8 +28,7 @@ function verifyToken(req, res, next) {
   if (token === null) {
     return res.status(401).send('missing credentials');
   }
-  let token = jwt.sign(payload, 'secretKey');
-  let payload = jwt.verify(token, '');
+  let payload = jwt.verify(token, SECRET_KEY);
 }
 
 router.get('/', (req, res) => {
@@ -50,7 +49,7 @@ router.post('/register', (req, res) => {
     } else {
       // registeredUser.email = ':)';
       let payload = { subject: registeredUser._id };
-      let token = jwt.sign(payload, 'secretKey');
+      let token = jwt.sign(payload, SECRET_KEY);
       res.status(200).send({ token });
     }
   });
