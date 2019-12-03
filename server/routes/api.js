@@ -1,7 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
-require('dotenv').config();
 const User = require('../models/user');
 
 const mongoose = require('mongoose');
@@ -10,6 +9,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
+require('dotenv').config();
 const db = 'mongodb://localhost/users';
 
 mongoose.connect(db, err => {
@@ -28,7 +28,12 @@ function verifyToken(req, res, next) {
   if (token === null) {
     return res.status(401).send('missing credentials');
   }
-  let payload = jwt.verify(token, SECRET_KEY);
+  let payload = jwt.verify(token, 'verydificultsecretkey');
+  if (!payload) {
+    return res.status(401).send('Unauthorized request');
+  }
+  req.userId = payload.subject;
+  next();
 }
 
 router.get('/', (req, res) => {
@@ -72,7 +77,7 @@ router.post('/login', (req, res) => {
           res.status(401).send('algo ha ido mal');
         } else {
           let payload = { subject: user._id };
-          let token = jwt.sign(payload, 'secretKey');
+          let token = jwt.sign(payload, SECRET_KEY);
           res.status(200).send({ token });
         }
       }
@@ -88,7 +93,7 @@ router.get('/libros', (req, res) => {
   ];
   res.json(libros);
 });
-router.get('/librosPro', (req, res) => {
+router.get('/librosPro', verifyToken, (req, res) => {
   let librosCaros = [
     { titulo: 'El retorno de jedi (PRO)', autor: 'varios', date: Date.now() },
     { titulo: 'El retorno de jedi (PRO)', autor: 'varios', date: Date.now() },
