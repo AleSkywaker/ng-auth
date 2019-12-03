@@ -15,8 +15,8 @@ const routes: Routes = [
   },
   {
     path: "librosPro",
-    component: LibrosProComponent,
-    canActivate: [AuthGuard]
+    component: LibrosProComponent
+    // canActivate: [AuthGuard]
   },
   {
     path: "login",
